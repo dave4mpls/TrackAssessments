@@ -40,6 +40,17 @@ namespace TrackAssessments
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                //--- how to set options for your password
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.SameSite = SameSiteMode.None;        // MAY have to do with ability to log in from multiple devices or maybe not-- try switching back to lax mode before deploying to production.
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
