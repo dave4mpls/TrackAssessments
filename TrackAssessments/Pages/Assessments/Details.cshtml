@@ -1,0 +1,102 @@
+﻿@page
+@model TrackAssessments.Pages.Assessments.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Assessment</h4>
+    <hr />
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Assessment.ID">Edit</a> |
+        <a asp-page="./Index">Back to List</a>
+    </div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Assessment.AssessmentName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Assessment.AssessmentName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Assessment.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Assessment.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Assessment.Creator)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Assessment.Creator)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Assessment.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Assessment.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Assessment.RequiredItems)
+        </dt>
+        <dd>
+            <p>
+                <a asp-route-AssessmentID="@Model.Assessment.ID" asp-page="../AcquiredItems/Create">Create New</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        @foreach (var item in Model.Assessment.AcquiredItems)
+                        {
+                            <th>
+                                @Html.DisplayNameFor(model => item.Acquired)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => item.ItemName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => item.ItemType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => item.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => item.Attachment)
+                            </th>
+                            break;
+                        }
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Assessment.AcquiredItems)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemType.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            <a target=_new asp-page="../AcquiredItems/Download" asp-route-id="@item.ID">
+                                @Html.DisplayFor(modelItem => item.AttachmentFileName)
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-page="../AcquiredItems/Edit" asp-route-AssessmentID="@Model.Assessment.ID" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-page="../AcquiredItems/Delete" asp-route-AssessmentID="@Model.Assessment.ID" asp-route-id="@item.ID">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+</div>

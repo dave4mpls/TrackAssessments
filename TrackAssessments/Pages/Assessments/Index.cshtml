@@ -1,0 +1,53 @@
+﻿@page
+@model TrackAssessments.Pages.AssessmentTypes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Assessment Types</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Assessment[0].AssessmentTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assessment[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assessment[0].Creator)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assessment[0].CreateDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Assessment) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssessmentTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.ID">Details/Edit</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,52 @@
+﻿@page
+@model TrackAssessments.Pages.RequiredItems.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Required Item</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div style="display: none;" class="form-group">
+                <label asp-for="RequiredItem.AssessmentTypeID" class="control-label"></label>
+                <input asp-for="RequiredItem.AssessmentTypeID" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="RequiredItem.ItemName" class="control-label"></label>
+                <input asp-for="RequiredItem.ItemName" class="form-control" />
+                <span asp-validation-for="RequiredItem.ItemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequiredItem.ItemTypeID" class="control-label"></label>
+                <select asp-for="RequiredItem.ItemTypeID" class="form-control" asp-items="ViewBag.ItemTypeID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequiredItem.Description" class="control-label"></label>
+                <textarea asp-for="RequiredItem.Description" class="form-control" rows="4" columns="60"></textarea>
+                <span asp-validation-for="RequiredItem.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequiredItem.Attachment" class="control-label"></label>
+                <input type=file asp-for="RequiredItem.Attachment" class="form-control" rows="4" columns="60" />
+                <span asp-validation-for="RequiredItem.Attachment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-route-id="@ViewBag.AssessmentTypeID" asp-page="../AssessmentTypes/Details">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
