@@ -24,6 +24,7 @@ namespace TrackAssessments.Model
         [DataType(DataType.Date)]
         public DateTime CreateDate { get; set; }
 
+        [Display(Name ="Required Items")]
         public ICollection<RequiredItem> RequiredItems { get; set; }
     }
 }

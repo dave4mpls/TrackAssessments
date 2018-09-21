@@ -30,7 +30,11 @@ namespace TrackAssessments.Pages.AssessmentTypes
                 return NotFound();
             }
 
-            AssessmentType = await _context.AssessmentType.FirstOrDefaultAsync(m => m.ID == id);
+            AssessmentType = await _context.AssessmentType
+                .Include(s => s.RequiredItems)
+                    .ThenInclude(ri => ri.ItemType)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (AssessmentType == null)
             {

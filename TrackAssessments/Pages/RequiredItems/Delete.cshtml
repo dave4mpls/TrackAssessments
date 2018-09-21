@@ -1,0 +1,40 @@
+﻿@page
+@model TrackAssessments.Pages.RequiredItems.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RequiredItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RequiredItem.ItemName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RequiredItem.ItemName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RequiredItem.ItemType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RequiredItem.ItemType.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RequiredItem.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RequiredItem.Description)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="RequiredItem.ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-route-id="@ViewBag.AssessmentTypeID" asp-page="../AssessmentTypes/Details">Back to List</a>
+    </form>
+</div>

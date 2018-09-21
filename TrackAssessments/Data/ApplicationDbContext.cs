@@ -15,6 +15,6 @@ namespace TrackAssessments.Data
         }
         public DbSet<TrackAssessments.Model.AssessmentType> AssessmentType { get; set; }
         public DbSet<ItemType> ItemType { get; set; }
-        public DbSet<ItemType> RequiredItem { get; set; }
+        public DbSet<RequiredItem> RequiredItem { get; set; }
     }
 }
