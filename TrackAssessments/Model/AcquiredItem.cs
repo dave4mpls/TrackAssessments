@@ -29,6 +29,9 @@ namespace TrackAssessments.Model
 
         public string Description { get; set; }
 
+        [StringLength(50)]
+        public string Barcode { get; set; }
+
         public byte[] Attachment { get; set; }
         public string AttachmentContentType { get; set; }
         public string AttachmentFileName { get; set; }

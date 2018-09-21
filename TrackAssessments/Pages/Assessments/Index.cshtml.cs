@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using TrackAssessments.Data;
 using TrackAssessments.Model;
 
-namespace TrackAssessments.Pages.AssessmentTypes
+namespace TrackAssessments.Pages.Assessments
 {
     [Authorize]
     public class IndexModel : PageModel
@@ -25,7 +25,11 @@ namespace TrackAssessments.Pages.AssessmentTypes
 
         public async Task OnGetAsync()
         {
-            Assessment = await _context.Assessment.ToListAsync();
+            Assessment = await _context.Assessment
+                .Include(s => s.AssessmentType)
+                .Include(s => s.Customer) 
+                .Include(S => S.Destination)
+                .ToListAsync();
         }
     }
 }

@@ -33,7 +33,6 @@ namespace TrackAssessments.Model
         public int AssessmentTypeID { get; set; }
 
         [Display(Name = "Assessment Type")]
-        [Required]
         public AssessmentType AssessmentType { get; set; }
 
         public string Description { get; set;  }

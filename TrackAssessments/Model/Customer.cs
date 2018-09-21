@@ -56,6 +56,17 @@ namespace TrackAssessments.Model
 
         public string Description { get; set; }
 
+        [Display(Name ="Full Name")]
+        public string DisplayName
+        {
+            get
+            {
+                string s = FirstName + " " + LastName;
+                if (Company != null) s = Company + ": " + s;
+                return s;
+            }
+        }
+
         //[Display(Name = "Assessments")]
         //public ICollection<Assessments> Assessments { get; set; }
     }

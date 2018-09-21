@@ -51,6 +51,14 @@ namespace TrackAssessments.Pages.RequiredItems
             {
                 return Page();
             }
+            RequiredItem originalItem = await _context.RequiredItem.FirstOrDefaultAsync(m => m.ID == RequiredItem.ID);
+            if (originalItem != null && Request.Form.Files.Count == 0)
+            {
+                RequiredItem.Attachment = originalItem.Attachment;
+                RequiredItem.AttachmentFileName = originalItem.AttachmentFileName;
+                RequiredItem.AttachmentContentType = originalItem.AttachmentContentType;
+            }
+            _context.Entry(originalItem).State = EntityState.Detached;  // detach from original item so you can attach to new one
             if (Request.Form.Files.Count > 0)
             {
                 Stream s = Request.Form.Files[0].OpenReadStream();

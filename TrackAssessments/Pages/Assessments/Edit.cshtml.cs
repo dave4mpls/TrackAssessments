@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using TrackAssessments.Data;
 using TrackAssessments.Model;
 
-namespace TrackAssessments.Pages.AssessmentTypes
+namespace TrackAssessments.Pages.Assessments
 {
     [Authorize]
     public class EditModel : PageModel
@@ -38,6 +38,9 @@ namespace TrackAssessments.Pages.AssessmentTypes
             {
                 return NotFound();
             }
+            ViewData["AssessmentTypeID"] = new SelectList(_context.AssessmentType.OrderBy(s => s.AssessmentTypeName), "ID", "AssessmentTypeName");
+            ViewData["DestinationID"] = new SelectList(_context.Destination.OrderBy(s => s.DestinationName), "ID", "DestinationName");
+            ViewData["CustomerID"] = new SelectList(_context.Customer.OrderBy(s => s.DisplayName), "ID", "DisplayName");
             return Page();
         }
 
@@ -56,7 +59,7 @@ namespace TrackAssessments.Pages.AssessmentTypes
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AssessmentTypeExists(Assessment.ID))
+                if (!AssessmentExists(Assessment.ID))
                 {
                     return NotFound();
                 }
@@ -69,7 +72,7 @@ namespace TrackAssessments.Pages.AssessmentTypes
             return RedirectToPage("./Index");
         }
 
-        private bool AssessmentTypeExists(int id)
+        private bool AssessmentExists(int id)
         {
             return _context.Assessment.Any(e => e.ID == id);
         }

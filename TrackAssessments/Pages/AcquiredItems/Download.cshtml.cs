@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using TrackAssessments.Data;
 using TrackAssessments.Model;
 
-namespace TrackAssessments.Pages.RequiredItems
+namespace TrackAssessments.Pages.AcquiredItems
 {
     [Authorize]
     public class DownloadModel : PageModel
@@ -22,7 +22,7 @@ namespace TrackAssessments.Pages.RequiredItems
             _context = context;
         }
 
-        public RequiredItem RequiredItem { get; set; }
+        public AcquiredItem AcquiredItem { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,24 +31,24 @@ namespace TrackAssessments.Pages.RequiredItems
                 return NotFound();
             }
 
-            RequiredItem = await _context.RequiredItem
+            AcquiredItem = await _context.AcquiredItem
                 .Include(r => r.ItemType).FirstOrDefaultAsync(m => m.ID == id);
 
-            if (RequiredItem == null)
+            if (AcquiredItem == null)
             {
                 return NotFound();
             }
-            if (RequiredItem.Attachment == null)
+            if (AcquiredItem.Attachment == null)
             {
                 return NotFound();
             }
             ContentDisposition cd = new ContentDisposition
             {
-                FileName = RequiredItem.AttachmentFileName,
+                FileName = AcquiredItem.AttachmentFileName,
                 Inline = true
             };
             Response.Headers.Add("Content-Disposition", cd.ToString());
-            return File(RequiredItem.Attachment, RequiredItem.AttachmentContentType);
+            return File(AcquiredItem.Attachment, AcquiredItem.AttachmentContentType);
         }
     }
 }

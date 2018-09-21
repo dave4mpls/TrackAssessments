@@ -22,6 +22,24 @@
             @Html.DisplayFor(model => model.Assessment.AssessmentName)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.Assessment.AssessmentType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Assessment.AssessmentType.AssessmentTypeName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Assessment.Destination)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Assessment.Destination.DestinationName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Assessment.Customer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Assessment.Customer.DisplayName)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Assessment.Description)
         </dt>
         <dd>
@@ -40,7 +58,7 @@
             @Html.DisplayFor(model => model.Assessment.CreateDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Assessment.RequiredItems)
+            @Html.DisplayNameFor(model => model.Assessment.AcquiredItems)
         </dt>
         <dd>
             <p>
@@ -64,6 +82,9 @@
                                 @Html.DisplayNameFor(model => item.Description)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => item.Barcode)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => item.Attachment)
                             </th>
                             break;
@@ -76,6 +97,9 @@
                     {
                     <tr>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Acquired)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.ItemName)
                         </td>
                         <td>
@@ -83,6 +107,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Barcode)
                         </td>
                         <td>
                             <a target=_new asp-page="../AcquiredItems/Download" asp-route-id="@item.ID">

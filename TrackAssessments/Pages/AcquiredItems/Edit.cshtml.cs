@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using TrackAssessments.Data;
 using TrackAssessments.Model;
 
-namespace TrackAssessments.Pages.RequiredItems
+namespace TrackAssessments.Pages.AcquiredItems
 {
     [Authorize]
     public class EditModel : PageModel
@@ -24,7 +24,7 @@ namespace TrackAssessments.Pages.RequiredItems
         }
 
         [BindProperty]
-        public RequiredItem RequiredItem { get; set; }
+        public AcquiredItem AcquiredItem { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,15 +33,15 @@ namespace TrackAssessments.Pages.RequiredItems
                 return NotFound();
             }
 
-            RequiredItem = await _context.RequiredItem
+            AcquiredItem = await _context.AcquiredItem
                 .Include(r => r.ItemType).FirstOrDefaultAsync(m => m.ID == id);
 
-            if (RequiredItem == null)
+            if (AcquiredItem == null)
             {
                 return NotFound();
             }
            ViewData["ItemTypeID"] = new SelectList(_context.ItemType, "ID", "Name");
-            ViewData["AssessmentTypeID"] = RequiredItem.AssessmentTypeID;
+            ViewData["AssessmentID"] = AcquiredItem.AssessmentID;
             return Page();
         }
 
@@ -51,6 +51,14 @@ namespace TrackAssessments.Pages.RequiredItems
             {
                 return Page();
             }
+            AcquiredItem originalItem = await _context.AcquiredItem.FirstOrDefaultAsync(m => m.ID == AcquiredItem.ID);
+            if (originalItem != null && Request.Form.Files.Count == 0)
+            {
+                AcquiredItem.Attachment = originalItem.Attachment;
+                AcquiredItem.AttachmentFileName = originalItem.AttachmentFileName;
+                AcquiredItem.AttachmentContentType = originalItem.AttachmentContentType;
+            }
+            _context.Entry(originalItem).State = EntityState.Detached;  // detach from original item so you can attach to new one
             if (Request.Form.Files.Count > 0)
             {
                 Stream s = Request.Form.Files[0].OpenReadStream();
@@ -59,9 +67,9 @@ namespace TrackAssessments.Pages.RequiredItems
                     byte[] buffer = new byte[s.Length];
                     s.Read(buffer, 0, (int)s.Length);
                     s.Close();
-                    RequiredItem.Attachment = buffer;
-                    RequiredItem.AttachmentFileName = Request.Form.Files[0].FileName;
-                    RequiredItem.AttachmentContentType = Request.Form.Files[0].ContentType;
+                    AcquiredItem.Attachment = buffer;
+                    AcquiredItem.AttachmentFileName = Request.Form.Files[0].FileName;
+                    AcquiredItem.AttachmentContentType = Request.Form.Files[0].ContentType;
                 }
                 else
                 {
@@ -71,7 +79,7 @@ namespace TrackAssessments.Pages.RequiredItems
                 }
             }
 
-            _context.Attach(RequiredItem).State = EntityState.Modified;
+            _context.Attach(AcquiredItem).State = EntityState.Modified;
 
             try
             {
@@ -79,7 +87,7 @@ namespace TrackAssessments.Pages.RequiredItems
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RequiredItemExists(RequiredItem.ID))
+                if (!AcquiredItemExists(AcquiredItem.ID))
                 {
                     return NotFound();
                 }
@@ -89,12 +97,12 @@ namespace TrackAssessments.Pages.RequiredItems
                 }
             }
 
-            return RedirectToPage("../AssessmentTypes/Details", new { id = RequiredItem.AssessmentTypeID } );
+            return RedirectToPage("../Assessments/Details", new { id = AcquiredItem.AssessmentID } );
         }
 
-        private bool RequiredItemExists(int id)
+        private bool AcquiredItemExists(int id)
         {
-            return _context.RequiredItem.Any(e => e.ID == id);
+            return _context.AcquiredItem.Any(e => e.ID == id);
         }
     }
 }

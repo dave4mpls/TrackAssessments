@@ -11,9 +11,6 @@ namespace TrackAssessments.Model
         public int ID { get; set; }
         public int AcquiredItemID { get; set; }
 
-        [StringLength(50)]
-        public string Barcode { get; set; }
-
         public double Latitude { get; set; }
         public double Longitude { get; set; }
 

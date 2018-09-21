@@ -1,5 +1,5 @@
 ﻿@page
-@model TrackAssessments.Pages.AssessmentTypes.EditModel
+@model TrackAssessments.Pages.Assessments.EditModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -7,7 +7,7 @@
 
 <h2>Edit</h2>
 
-<h4>Assessment Type</h4>
+<h4>Assessment</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,23 +15,35 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Assessment.ID" />
             <div class="form-group">
-                <label asp-for="Assessment.AssessmentTypeName" class="control-label"></label>
-                <input asp-for="Assessment.AssessmentTypeName" class="form-control" />
-                <span asp-validation-for="Assessment.AssessmentTypeName" class="text-danger"></span>
+                <label asp-for="Assessment.AssessmentName" class="control-label"></label>
+                <input asp-for="Assessment.AssessmentName" class="form-control" />
+                <span asp-validation-for="Assessment.AssessmentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assessment.AssessmentTypeID" class="control-label"></label>
+                <select asp-for="Assessment.AssessmentTypeID" class="form-control" asp-items="ViewBag.AssessmentTypeID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assessment.DestinationID" class="control-label"></label>
+                <select asp-for="Assessment.DestinationID" class="form-control" asp-items="ViewBag.DestinationID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assessment.CustomerID" class="control-label"></label>
+                <select asp-for="Assessment.CustomerID" class="form-control" asp-items="ViewBag.CustomerID"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Assessment.Description" class="control-label"></label>
-                <textarea rows=4 columns=60 asp-for="Assessment.Description" class="form-control" ></textarea>
+                <textarea rows=4 columns=60 asp-for="Assessment.Description" class="form-control"></textarea>
                 <span asp-validation-for="Assessment.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Assessment.Creator" class="control-label"></label>
-                <input disabled asp-for="Assessment.Creator" class="form-control" />
+                <input readonly asp-for="Assessment.Creator" class="form-control" />
                 <span asp-validation-for="Assessment.Creator" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Assessment.CreateDate" class="control-label"></label>
-                <input disabled asp-for="Assessment.CreateDate" class="form-control" />
+                <input readonly asp-for="Assessment.CreateDate" class="form-control" />
                 <span asp-validation-for="Assessment.CreateDate" class="text-danger"></span>
             </div>
             <div class="form-group">

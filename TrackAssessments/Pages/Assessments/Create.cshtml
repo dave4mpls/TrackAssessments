@@ -19,6 +19,18 @@
                 <span asp-validation-for="Assessment.AssessmentName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Assessment.AssessmentTypeID" class="control-label"></label>
+                <select asp-for="Assessment.AssessmentTypeID" class="form-control" asp-items="ViewBag.AssessmentTypeID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assessment.DestinationID" class="control-label"></label>
+                <select asp-for="Assessment.DestinationID" class="form-control" asp-items="ViewBag.DestinationID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assessment.CustomerID" class="control-label"></label>
+                <select asp-for="Assessment.CustomerID" class="form-control" asp-items="ViewBag.CustomerID"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="Assessment.Description" class="control-label"></label>
                 <textarea rows=4 columns=60 asp-for="Assessment.Description" class="form-control"></textarea>
                 <span asp-validation-for="Assessment.Description" class="text-danger"></span>

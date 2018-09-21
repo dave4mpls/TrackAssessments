@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using TrackAssessments.Data;
 using TrackAssessments.Model;
 
-namespace TrackAssessments.Pages.RequiredItems
+namespace TrackAssessments.Pages.AcquiredItems
 {
     [Authorize]
     public class CreateModel : PageModel
@@ -23,19 +23,19 @@ namespace TrackAssessments.Pages.RequiredItems
         }
 
         [BindProperty]
-        public RequiredItem RequiredItem { get; set; }
+        public AcquiredItem AcquiredItem { get; set; }
 
-        public IActionResult OnGet(int? AssessmentTypeID)
+        public IActionResult OnGet(int? AssessmentID)
         {
-            if (AssessmentTypeID == null)
+            if (AssessmentID == null)
             {
                 return NotFound();
             }
             ViewData["ItemTypeID"] = new SelectList(_context.ItemType, "ID", "Name");
-            ViewData["AssessmentTypeID"] = (int)AssessmentTypeID;
-            RequiredItem = new RequiredItem();
-            RequiredItem.ItemTypeID = 1;
-            RequiredItem.AssessmentTypeID = (int) AssessmentTypeID;
+            ViewData["AssessmentID"] = (int)AssessmentID;
+            AcquiredItem = new AcquiredItem();
+            AcquiredItem.ItemTypeID = 1;
+            AcquiredItem.AssessmentID = (int) AssessmentID;
             return Page();
         }
 
@@ -53,9 +53,9 @@ namespace TrackAssessments.Pages.RequiredItems
                     byte[] buffer = new byte[s.Length];
                     s.Read(buffer, 0, (int)s.Length);
                     s.Close();
-                    RequiredItem.Attachment = buffer;
-                    RequiredItem.AttachmentFileName = Request.Form.Files[0].FileName;
-                    RequiredItem.AttachmentContentType = Request.Form.Files[0].ContentType;
+                    AcquiredItem.Attachment = buffer;
+                    AcquiredItem.AttachmentFileName = Request.Form.Files[0].FileName;
+                    AcquiredItem.AttachmentContentType = Request.Form.Files[0].ContentType;
                 }
                 else
                 {
@@ -65,10 +65,10 @@ namespace TrackAssessments.Pages.RequiredItems
                 }
             }
 
-            _context.RequiredItem.Add(RequiredItem);
+            _context.AcquiredItem.Add(AcquiredItem);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("../AssessmentTypes/Details", new { id = RequiredItem.AssessmentTypeID });
+            return RedirectToPage("../Assessments/Details", new { id = AcquiredItem.AssessmentID });
         }
     }
 }

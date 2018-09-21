@@ -19,8 +19,9 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <link rel="stylesheet" href="~/css/barcode.css" asp-append-version="true" />
 </head>
-<body>
+<body onload="javascript: bodyOnLoad()">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -63,6 +64,9 @@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="//webrtc.github.io/adapter/adapter-latest.js" asp-append-version="true"></script>
+        <script src="~/js/quagga.min.js" asp-append-version="true"></script>
+        <script src="~/js/live_w_locator.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
@@ -78,6 +82,9 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
+        <script src="//webrtc.github.io/adapter/adapter-latest.js" asp-append-version="true"></script>
+        <script src="~/js/quagga.min.js" asp-append-version="true"></script>
+        <script src="~/js/live_w_locator.js" asp-append-version="true"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 

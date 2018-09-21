@@ -31,6 +31,9 @@ namespace TrackAssessments.Pages.Assessments
             }
 
             Assessment = await _context.Assessment
+                .Include(s => s.AssessmentType)
+                .Include(s => s.Customer)
+                .Include(s => s.Destination)
                 .Include(s => s.AcquiredItems)
                     .ThenInclude(ri => ri.Checkpoints)
                     .Include(s => s.AcquiredItems)

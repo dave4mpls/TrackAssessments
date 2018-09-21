@@ -1,11 +1,11 @@
 ﻿@page
-@model TrackAssessments.Pages.AssessmentTypes.IndexModel
+@model TrackAssessments.Pages.Assessments.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Assessment Types</h2>
+<h2>Assessments</h2>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,10 +14,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Assessment[0].AssessmentTypeName)
+                @Html.DisplayNameFor(model => model.Assessment[0].AssessmentName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Assessment[0].Description)
+                @Html.DisplayNameFor(model => model.Assessment[0].AssessmentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assessment[0].Destination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assessment[0].Customer)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Assessment[0].Creator)
@@ -32,7 +38,16 @@
 @foreach (var item in Model.Assessment) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AssessmentTypeName)
+                @Html.DisplayFor(modelItem => item.AssessmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssessmentType.AssessmentTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destination.DestinationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.DisplayName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
