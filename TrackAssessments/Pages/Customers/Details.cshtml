@@ -1,0 +1,85 @@
+﻿@page
+@model TrackAssessments.Pages.Customers.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.MiddleName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.MiddleName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.Company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Company)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.StreetAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.StreetAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.State)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.State)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.Zip)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Zip)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.PhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.EmailAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.EmailAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Description)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Customer.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
